@@ -1,0 +1,13 @@
+# Catalyst
+.catalystrc
+.catalyst/
+
+# Python
+__pycache__/
+*.pyc
+
+# Node (si agregas luego)
+node_modules/
+
+# OS
+.DS_Store
