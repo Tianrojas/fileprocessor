@@ -9,6 +9,7 @@ except ImportError:
 from services.auth_service import get_authenticated_user
 from controllers.user_controller import get_me
 from controllers.math_controller import handle_sum
+from controllers.upload_controller import handle_upload
 
 def handler(request: Request):
     app = zcatalyst_sdk.initialize()
@@ -23,6 +24,9 @@ def handler(request: Request):
 
     elif request.path == "/sum":
         return handle_sum(request)
+    
+    elif request.path == "/upload":
+        return handle_upload(request)
 
     elif request.path == "/":
         return jsonify({
