@@ -1,19 +1,16 @@
+from services.file_store import save_file
 from flask import jsonify
-from services.file_processing_service import process_file_stream
 
 def handle_upload(request):
-    try:
-        file = request.files.get("file")
 
-        if not file:
-            return jsonify({"error": "No file uploaded"}), 400
+    file = request.files.get("file")
 
-        result = process_file_stream(file)
+    if not file:
+        return jsonify({"error": "No file"}), 400
 
-        return jsonify({
-            "status": "ok",
-            "data": result
-        }), 200
+    save_file(file)
 
-    except Exception as e:
-        return jsonify({"error": str(e)}), 400
+    return jsonify({
+        "status": "file stored",
+        "filename": file.filename
+    })

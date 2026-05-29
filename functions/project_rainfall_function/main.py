@@ -8,8 +8,9 @@ except ImportError:
 
 from services.auth_service import get_authenticated_user
 from controllers.user_controller import get_me
-from controllers.math_controller import handle_sum
 from controllers.upload_controller import handle_upload
+from controllers.file_info_controller import get_file_info, get_columns
+
 
 def handler(request: Request):
     app = zcatalyst_sdk.initialize()
@@ -18,15 +19,24 @@ def handler(request: Request):
     user = get_authenticated_user(app)
     if not user:
         return make_response("Unauthorized", 401)
+    
+    path = request.path
+    method = request.method
 
     if request.path == "/me":
         return get_me(user)
-
-    elif request.path == "/sum":
-        return handle_sum(request)
     
-    elif request.path == "/upload":
-        return handle_upload(request)
+    elif path == "/upload":
+        if method == "POST":
+            return handle_upload(request) # not implemented yet
+        else:
+            return make_response("Method Not Allowed", 405)
+
+    elif path == "/fun1" and method == "GET":
+        return get_file_info()
+
+    elif path == "/fun2" and method == "GET":
+        return get_columns()
 
     elif request.path == "/":
         return jsonify({
