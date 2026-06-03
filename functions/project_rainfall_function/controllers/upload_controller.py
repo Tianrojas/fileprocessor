@@ -1,16 +1,11 @@
-from services.file_store import save_file
+from services.file_store_service import upload_to_filestore
 from flask import jsonify
 
 def handle_upload(request):
 
-    file = request.files.get("file")
-
-    if not file:
-        return jsonify({"error": "No file"}), 400
-
-    save_file(file)
+    file_id = upload_to_filestore(request)
 
     return jsonify({
-        "status": "file stored",
-        "filename": file.filename
+        "status": "stored",
+        "file_id": file_id
     })

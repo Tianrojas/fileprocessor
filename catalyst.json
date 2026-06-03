@@ -1,7 +1,8 @@
 {
   "functions": {
     "targets": [
-      "project_rainfall_function"
+      "project_rainfall_function",
+      "project_rainfall_node"
     ],
     "ignore": [],
     "source": "functions"

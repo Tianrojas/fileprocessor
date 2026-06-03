@@ -1,6 +1,5 @@
 
 import { loadUser } from './user.js';
-import { setupSum } from './sum.js';
 import { setupUpload } from './upload.js';
 
 window.addEventListener("load", async () => {
@@ -14,6 +13,5 @@ window.addEventListener("load", async () => {
   document.getElementById("welcome").innerText =
     `Hello ${user.first_name} from Catalyst APP. Your role is ${user.role}`;
 
-  //setupSum();
   setupUpload();
 });

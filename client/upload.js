@@ -4,6 +4,9 @@ export function setupUpload() {
   document.getElementById("uploadBtn2").addEventListener("click", fun2);
 }
 
+let fileId = null;
+
+
 async function uploadFile() {
   const file = document.getElementById("fileInput").files[0];
 
@@ -15,25 +18,44 @@ async function uploadFile() {
   const formData = new FormData();
   formData.append("file", file);
 
-  const res = await fetch("/server/project_rainfall_function/upload", {
-    method: "POST",
-    body: formData
-  });
+  try {
+    const res = await fetch("/server/project_rainfall_node/upload", {
+      method: "POST",
+      body: formData
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
-  console.log("Upload response:", data);
+    console.log("Upload response (Node):", data);
+
+    if (!res.ok || !data.file_id) {
+      alert("Upload failed");
+      return;
+    }
+
+    fileId = data.file_id;
+    alert(`Uploaded correctly. file_id = ${fileId}`);
+  } catch (err) {
+    console.error(err);
+    alert("Upload error");
+  }
 }
 
 async function fun1() {
-  const res = await fetch("/server/project_rainfall_function/fun1");
+  const res = await fetch(
+    `/server/project_rainfall_function/fun1?file_id=${fileId}`
+  );
+
   const data = await res.json();
 
   console.log("File info:", data);
 }
 
 async function fun2() {
-  const res = await fetch("/server/project_rainfall_function/fun2");
+  const res = await fetch(
+    `/server/project_rainfall_function/fun2?file_id=${fileId}`
+  );
+
   const data = await res.json();
 
   console.log("Columns:", data);

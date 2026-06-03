@@ -26,11 +26,9 @@ def handler(request: Request):
     if request.path == "/me":
         return get_me(user)
     
-    elif path == "/upload":
-        if method == "POST":
-            return handle_upload(request) # not implemented yet
-        else:
-            return make_response("Method Not Allowed", 405)
+    elif path == "/upload" and method == "POST":
+        return handle_upload(request)
+
 
     elif path == "/fun1" and method == "GET":
         return get_file_info()
