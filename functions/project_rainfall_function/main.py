@@ -8,8 +8,6 @@ except ImportError:
 
 from services.auth_service import get_authenticated_user
 from controllers.user_controller import get_me
-from controllers.upload_controller import handle_upload
-from controllers.file_info_controller import get_file_info, get_columns
 
 
 def handler(request: Request):
@@ -25,16 +23,6 @@ def handler(request: Request):
 
     if request.path == "/me":
         return get_me(user)
-    
-    elif path == "/upload" and method == "POST":
-        return handle_upload(request)
-
-
-    elif path == "/fun1" and method == "GET":
-        return get_file_info()
-
-    elif path == "/fun2" and method == "GET":
-        return get_columns()
 
     elif request.path == "/":
         return jsonify({

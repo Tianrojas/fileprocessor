@@ -11,3 +11,7 @@ node_modules/
 
 # OS
 .DS_Store
+
+# ENVIROMENT KEYS
+functions/project_rainfall_node/.env
+functions/project_rainfall_function/.env

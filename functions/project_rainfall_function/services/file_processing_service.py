@@ -1,11 +1,10 @@
 from models.record_factory import create_record
 
-records = []
+def build_records(parsed_rows, tipo="ITSM"):
+    records = []
 
-#Modo de usar la función create_record para crear un nuevo registro y agregarlo a la lista de registros
-for row in parsed_rows:
+    for row in parsed_rows:
+        record = create_record(tipo, row)
+        records.append(record.to_dict())
 
-    record = create_record("ITSM", row)
-
-    records.append(record.to_dict())
-
+    return records

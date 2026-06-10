@@ -11,7 +11,8 @@ window.addEventListener("load", async () => {
   document.getElementById("app").style.display = "block";
 
   document.getElementById("welcome").innerText =
-    `Hello ${user.first_name} from Catalyst APP. Your role is ${user.role}`;
+    `Hello ${user.first_name || "User"} from Catalyst APP. Your role is ${user.role || "Unknown"}`;
 
   setupUpload();
 });
+
